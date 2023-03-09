@@ -1,7 +1,7 @@
 <?php
 require("connection.php");
 require("functions.php");
-if(isset( $_SESSION['ADMIN_LOGIN']) &&  $_SESSION['ADMIN_LOGIN']!=''){
+if(isset( $_SESSION['ADMIN_LOGIN']) &&  $_SESSION['ADMIN_LOGIN']!='' || isset( $_SESSION['TAILOR_LOGIN']) &&  $_SESSION['TAILOR_LOGIN']!=''){
 }
 else{
     header('location:login.php');
@@ -157,30 +157,23 @@ else{
                 <li class="<?php echo $nav_stateh ?>"><a href="dashboard.php"><i class="ft-home"></i><span
                             class="menu-title" data-i18n="">Dashboard</span></a>
                 </li>
+                <!-- if admin then show this menu  -->
+                <?php if($_SESSION['USER_TYPE'] == 'admin'){ ?>
                 <li class="<?php echo $nav_state_cat ?>"><a href="categories.php"><i class="ft-pie-chart"></i><span
                             class="menu-title" data-i18n="">Category Master</span></a>
                 </li>
+                <li class=" <?php echo $nav_state_user ?>"><a href="users.php"><i class="ft-box"></i><span
+                            class="menu-title" data-i18n="">User Master</span></a>
+                </li>
+                <?php } ?>
                 <li class=" <?php echo $nav_state_pro ?>"><a href="product.php"><i class="ft-droplet"></i><span
                             class="menu-title" data-i18n="">Product Master</span></a>
                 </li>
                 <li class=" <?php echo $nav_state_order ?>"><a href="order_master.php"><i class="ft-layers"></i><span
                             class="menu-title" data-i18n="">Order Master</span></a>
                 </li>
-                <li class=" <?php echo $nav_state_user ?>"><a href="users.php"><i class="ft-box"></i><span
-                            class="menu-title" data-i18n="">User Master</span></a>
-                </li>
                 <li class=" <?php echo $nav_state_cont ?>"><a href="contact-us.php"><i class="ft-bold"></i><span
                             class="menu-title" data-i18n="">Contact Us</span></a>
-                </li>
-                <li class=" nav-item"><a href="tables.html"><i class="ft-credit-card"></i><span class="menu-title"
-                            data-i18n="">Tables</span></a>
-                </li>
-                <li class=" nav-item"><a href="form-elements.html"><i class="ft-layout"></i><span class="menu-title"
-                            data-i18n="">Form Elements</span></a>
-                </li>
-                <li class=" nav-item"><a
-                        href="https://themeselection.com/demo/chameleon-admin-template/documentation"><i
-                            class="ft-book"></i><span class="menu-title" data-i18n="">Documentation</span></a>
                 </li>
             </ul>
         </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" href="#" target="_blank">StitchIt

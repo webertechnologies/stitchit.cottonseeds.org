@@ -16,12 +16,26 @@ if(isset($_POST["submit"])){
     $count=mysqli_num_rows($result);
     if($count > 0){
         $_SESSION['ADMIN_LOGIN']='yes';
+        $_SESSION['USER_TYPE']='admin';
         $_SESSION['ADMIN_USERNAME']=$username;
         // header('location:dashboard.php');
         echo "<script>window.location.href='index.php'</script>";
     }
     else{
-        $msg="May be you are not regitered, or check details";
+        // also check `tailors` table for tailors login 
+        $sql= "select * from `tailors` where username = '$username' and password = '$password'";
+        $result = $con->query($sql);
+        $count=mysqli_num_rows($result);
+        if($count > 0){
+            $_SESSION['TAILOR_LOGIN']='yes';
+            $_SESSION['USER_TYPE']='tailor';
+            $_SESSION['TAILOR_USERNAME']=$username;
+            // header('location:dashboard.php');
+            echo "<script>window.location.href='index.php'</script>";
+        }
+        else{
+            $msg="May be you are not regitered, or check details";
+        }
     }
 }
 ?>
