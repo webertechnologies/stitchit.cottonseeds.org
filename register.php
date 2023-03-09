@@ -7,19 +7,24 @@ if(isset($_SESSION['USER_LOGIN']) && $_SESSION['USER_LOGIN']!=''){
 }
 if(isset($_POST['submit'])){
     $email=get_safe_value($con,$_POST['email']);
-    $password=get_safe_value($con,$_POST['pass']);
-    $res=mysqli_query($con,"SELECT * FROM `users` WHERE `users`.`email`='$email' and `users`.`pass`='$password'");
-    $check_user=mysqli_num_rows($res);
-    if($check_user>0){
-        $row=mysqli_fetch_assoc($res);
-        $_SESSION['USER_LOGIN']='yes';
-        $_SESSION['USER_ID']=$row['id'];
-        $_SESSION['NAME']=$row['name'];
-        $_SESSION['EMAIL']=$row['email'];
-        $_SESSION['USER_ADDRESS']=$row['address'];
-        echo"<script>window.location.href='index.php'</script>";
+    // check if the email is already in the database and if it is, then don't allow the user to register with the same email
+    $check_email = mysqli_query($con, "SELECT * FROM `users` WHERE `users`.`email`='$email'");
+    $check_email_count = mysqli_num_rows($check_email);
+    if($check_email_count > 0){
+        echo "Email already exists";
+        die();
     }else{
-        echo"no";
+        $username=get_safe_value($con,$_POST['username']);
+    $address=get_safe_value($con,$_POST['address']);
+    $password=get_safe_value($con,$_POST['pass']);
+    $res=mysqli_query($con,"INSERT INTO `users`(`id`, `name`, `email`, `address`, `pass`, `status`) VALUES (NULL,'$username','$email','$address','$password','1')");
+    if($res){
+        echo "Registration Successful";
+        echo "<script>window.location.href='login.php'</script>";
+    }else{
+        echo "Registration Failed";
+        echo "<script>window.location.href='register.php'</script>";
+    }
     }
 }
 ?>
@@ -28,7 +33,7 @@ if(isset($_POST['submit'])){
 
 <head>
     <!-- Design by foolishdeveloper.com -->
-    <title>Login</title>
+    <title>Register</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -61,7 +66,7 @@ if(isset($_POST['submit'])){
     }
 
     form {
-        height: 520px;
+        /* height: 520px; */
         width: 400px;
         background-color: rgba(255, 255, 255, 0.13);
         position: absolute;
@@ -151,11 +156,6 @@ if(isset($_POST['submit'])){
     .social i {
         margin-right: 4px;
     }
-
-    .signup {
-        margin-top: 20px;
-        text-align: center;
-    }
     </style>
 </head>
 
@@ -168,16 +168,22 @@ if(isset($_POST['submit'])){
         <h3>Login Here</h3>
 
         <label for="username">Username</label>
-        <input type="text" name="email" placeholder="Email" id="username" />
+        <input type="text" name="username" placeholder="username" id="username" required />
+        <!-- mail  -->
+        <label for="mail">Email</label>
+        <input type="text" name="email" placeholder="Email" id="email" required />
+        <!-- address  -->
+        <label for="address">Address</label>
+        <input type="text" name="address" placeholder="Address" id="address" required />
 
         <label for="password">Password</label>
-        <input type="password" name="pass" placeholder="Password" id="password" />
+        <input type="password" name="pass" placeholder="Password" id="password" required />
+
+        <!-- confirm password  -->
+        <label for="cpassword">Confirm Password</label>
+        <input type="password" name="cpass" placeholder="Confirm Password" id="cpassword" required />
 
         <button type="submit" name="submit" value="submit">Log In</button>
-
-        <div class="signup">
-            Don't have an account? <a href="register.php">Sign Up</a>
-        </div>
         <!-- <div class="social">
         <div class="go"><i class="fab fa-google"></i> Google</div>
         <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
