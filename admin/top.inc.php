@@ -165,6 +165,9 @@ else{
                 <li class=" <?php echo $nav_state_user ?>"><a href="users.php"><i class="ft-box"></i><span
                             class="menu-title" data-i18n="">User Master</span></a>
                 </li>
+                <li class=" <?php echo $nav_state_user ?>"><a href="tailors.php"><i class="ft-box"></i><span
+                            class="menu-title" data-i18n="">Tailor Master</span></a>
+                </li>
                 <?php } ?>
                 <li class=" <?php echo $nav_state_pro ?>"><a href="product.php"><i class="ft-droplet"></i><span
                             class="menu-title" data-i18n="">Product Master</span></a>
