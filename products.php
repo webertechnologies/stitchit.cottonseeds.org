@@ -24,7 +24,7 @@ if(isset($_GET['category'])){
 <div class="content-wrapper">
 
     <div class="content-section">
-        <h3>Your Orders</h3>
+        <h3>Available Orders</h3>
         <!-- All products catalogue in a row using bootstrap  -->
         <div class="row">
 
@@ -56,7 +56,9 @@ if(isset($_GET['category'])){
                                 <p class="card-text text-center">Price: <?php echo $row['price']; ?></p>
                             </div>
                             <div class="col-6">
-                                <p class="card-text text-center">Order Now</p>
+                                <p class="card-text text-center"><a
+                                        href="myorders?order=<?php echo $row['id']; ?> ">Order
+                                        Now</a></p>
                             </div>
                         </div>
                     </div>
@@ -67,7 +69,8 @@ if(isset($_GET['category'])){
         </div>
     </div>
 </div>
-<div class="overlay-app"></div>
+<div class=" overlay-app">
+</div>
 </div>
 <!-- partial -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

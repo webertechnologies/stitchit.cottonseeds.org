@@ -1,5 +1,21 @@
-<?php include('top_inc.php'); ?>
-
+<?php 
+include('configs/connection.php');
+include('configs/functions.php');
+include('top_inc.php'); 
+// get tailor details 
+if(isset($_GET['uid'])){
+    $id = $_GET['uid'];
+    $res = mysqli_query($con,"SELECT * FROM `tailors` WHERE `id`='$id'");
+    $row = mysqli_fetch_assoc($res);
+    $name = $row['name'];
+    $address = $row['address'];
+    $rating = $row['rating'];
+    $image = $row['image'];
+    $mobile = $row['mobile'];
+    $email = $row['email'];
+    $description = $row['des'];
+}
+?>
 <!-- tailor profile section  -->
 <!-- <div class="tailor-profile">
                 <div class="tailor-profile-img">
@@ -13,11 +29,11 @@
 <div class="content-wrapper">
     <div class="content-wrapper-header profile">
         <div class="content-wrapper-context">
-            <h3 class="img-content">Ammulu Tailors</h3>
+            <h3 class="img-content"><?php echo $name; ?> </h3>
             <!-- adress and rating in a flex row using boostrap  -->
             <div class="row">
                 <div class="col-6">
-                    <p class="content-text">Kukatpally, Hyderabad.</p>
+                    <p class="content-text"><?php echo $address ?></p>
                 </div>
                 <div class="col-6">
                     <p class="content-text">
@@ -27,14 +43,13 @@
                             <path fill-rule="evenodd"
                                 d="M8 1.143l1.616 4.03h4.338l-3.49 2.53 1.338 4.143L8 10.714l-3.828 2.764 1.338-4.143L1.5 5.173h4.338L8 1.143z" />
                         </svg>
-                        4.7/5
+                        <?php echo $rating; ?>/5
                     </p>
                 </div>
             </div>
 
             <div class="content-text">
-                Branded gochies to shinchan dresses.<br />
-                Juss stitch like a boss.
+                <?php echo $description; ?>
             </div>
             <button class="content-button">Book Now</button>
         </div>

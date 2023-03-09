@@ -36,7 +36,7 @@
             <div class="header-menu">
                 <a class="menu-link is-active" href="index">Home</a>
                 <a class="menu-link notify" href="myorders">Your Orders</a>
-                <a class="menu-link notify" href="#">Settings</a>
+                <!-- <a class="menu-link notify" href="#">Settings</a> -->
             </div>
             <div class="search-bar">
                 <form method="GET" action="products">
@@ -133,6 +133,6 @@
                     <div class="header-menu">
                         <a class="main-header-link is-active" href="index">Home</a>
                         <a class="main-header-link" href="myorders">Your Orders</a>
-                        <a class="main-header-link" href="#">Settings</a>
+                        <!-- <a class="main-header-link" href="#">Settings</a> -->
                     </div>
                 </div>

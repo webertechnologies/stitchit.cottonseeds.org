@@ -1,6 +1,26 @@
 <?php
+include('configs/connection.php');
+include('configs/functions.php');
 $page_title="My Orders";
-include('top_inc.php'); ?>
+include('top_inc.php'); 
+
+
+if(isset($_GET['order'])){
+
+    $pid = $_GET['order'];
+    $uid = $_SESSION['USER_ID'];
+    $order_date = date('Y-m-d');
+    $address= $_SESSION['USER_ADDRESS'];
+    $res = mysqli_query($con,"INSERT INTO `orders`(`id`,`pid`, `uid`, `order_date`, `address`, `status`) VALUES (NULL,'$pid','$uid','$order_date','$address', '1')");
+    // echo query 
+    if($res){
+        echo "<script>alert('Order Placed Successfully')</script>";
+    }else{
+        echo "<script>alert('Order Failed')</script>";
+    }
+}
+
+?>
 
 <!-- tailor profile section  -->
 <!-- <div class="tailor-profile">
@@ -18,69 +38,39 @@ include('top_inc.php'); ?>
         <h3>Your Orders</h3>
         <!-- All products catalogue in a row using bootstrap  -->
         <div class="row">
+
+            <?php
+        $uid=$_SESSION['USER_ID'];
+        $res=mysqli_query($con,"select orders.*,product.name,product.image,product.price, product.des, product.mrp from orders,product where orders.pid=product.id and orders.uid='$uid'");
+        while($row=mysqli_fetch_assoc($res)){
+        ?>
             <div class="col-sm">
                 <div class="card catt">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngimagesfree.com%2FPeople%2FSaree%2FSaree-2%2FSaree-PNG-For-Photoshop.png&f=1&nofb=1&ipt=a7392d612b59dc3a386f956ac80ab1184bf7d619a18fb6fa13d623b3c9e54cf8&ipo=images"
-                        class="card-img-top" alt="..." />
+                    <img src="<?php 
+                    if($row['image']==''){
+                        echo "images/no-image.png";
+                    }else{
+                    echo 'media/product/'.$row['image'] ;
+                        } ?>" class="card-img-top" alt="..." />
                     <div class="card-body">
-                        <h5 class="card-title text-center">Card title</h5>
+                        <h5 class="card-title text-center"><?php echo $row['name'] ?></h5>
                         <p class="card-text text-center">
-                            Some quick example text to build on the card title and
-                            make up the bulk of the card's content.
+                            <?php echo $row['des'] ?>
                         </p>
                         <div class="row">
                             <div class="col-6">
-                                <p class="card-text text-center">Price</p>
+                                <p class="card-text text-center"> <?php echo $row['price']; ?> </p>
                             </div>
                             <div class="col-6">
-                                <p class="card-text text-center">Rating</p>
+                                <p class="card-text text-center"><?php echo $row['mrp']; ?> </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm">
-                <div class="card catt">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngimagesfree.com%2FPeople%2FSaree%2FSaree-2%2FSaree-PNG-For-Photoshop.png&f=1&nofb=1&ipt=a7392d612b59dc3a386f956ac80ab1184bf7d619a18fb6fa13d623b3c9e54cf8&ipo=images"
-                        class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Card title</h5>
-                        <p class="card-text text-center">
-                            Some quick example text to build on the card title and
-                            make up the bulk of the card's content.
-                        </p>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="card-text text-center">Price</p>
-                            </div>
-                            <div class="col-6">
-                                <p class="card-text text-center">Rating</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm">
-                <div class="card catt">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngimagesfree.com%2FPeople%2FSaree%2FSaree-2%2FSaree-PNG-For-Photoshop.png&f=1&nofb=1&ipt=a7392d612b59dc3a386f956ac80ab1184bf7d619a18fb6fa13d623b3c9e54cf8&ipo=images"
-                        class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Card title</h5>
-                        <p class="card-text text-center">
-                            Some quick example text to build on the card title and
-                            make up the bulk of the card's content.
-                        </p>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="card-text text-center">Price</p>
-                            </div>
-                            <div class="col-6">
-                                <p class="card-text text-center">Rating</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
+
+
         </div>
     </div>
 </div>

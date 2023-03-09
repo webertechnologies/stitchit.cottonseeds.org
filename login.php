@@ -15,6 +15,8 @@ if(isset($_POST['submit'])){
         $_SESSION['USER_LOGIN']='yes';
         $_SESSION['USER_ID']=$row['id'];
         $_SESSION['NAME']=$row['name'];
+        $_SESSION['EMAIL']=$row['email'];
+        $_SESSION['USER_ADDRESS']=$row['address'];
         echo"<script>window.location.href='index.php'</script>";
     }else{
         echo"no";
