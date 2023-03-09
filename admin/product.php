@@ -22,81 +22,90 @@ if(isset($_GET['type']) && $_GET['type']!=''){
         mysqli_query($con, $delete_status);
     }
 }
-$sql = "select product.*,categories.categories from `product`,`categories` where `product`.`categories_id`=`categories`.`id` order by `product`.`id` DESC";
-$res=mysqli_query($con, $sql);
+if($_SESSION['USER_TYPE']=='admin'){
+	$sql = "select product.*,categories.categories from `product`,`categories` where `product`.`categories_id`=`categories`.`id` order by `product`.`id` DESC";
+	$res=mysqli_query($con, $sql);
+}
+else if($_SESSION['USER_TYPE']=='tailor'){
+	$tid=$_SESSION['TAILOR_ID'];
+	$sql = "select product.*,categories.categories from `product`,`categories` where `product`.`categories_id`=`categories`.`id` and `added_by`='$tid' order by `product`.`id` DESC";
+	$res=mysqli_query($con, $sql);
+}
 ?>
 <!-- <div class="inner-main"> 
 <h1>This is category</h1>
 </div> -->
 <div class="app-content content">
-  <div class="content-wrapper">
-    <!-- <div class="content-body">Chart -->
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Products</h4>
-				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-				<div class="heading-elements">
-					<ul class="list-inline mb-0">
-						<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-						<li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-						<li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-						<li><a data-action="close"><i class="ft-x"></i></a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="card-content collapse show">
-				<div class="card-body">
-					<p><a href="manage-products.php">Wanna add products ?<code class="highlighter-rouge">Click here</code></a> </p>
-				</div>
-				<div class="table-responsive">
-					<table class="table">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">Id</th>
-								<th scope="col">Category</th>
-								<th scope="col">Image</th>
-                                <th scope="col">mrp</th>
-                                <th scope="col">price</th>
-                                <th scope="col">qty</th>
-                                <th scope="col">Status</th>
-							</tr>
-						</thead>
-						<tbody>
-                            <?php
+    <div class="content-wrapper">
+        <!-- <div class="content-body">Chart -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Products</h4>
+                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        <div class="heading-elements">
+                            <ul class="list-inline mb-0">
+                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-content collapse show">
+                        <div class="card-body">
+                            <p><a href="manage-products.php">Wanna add products ?<code
+                                        class="highlighter-rouge">Click here</code></a> </p>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">mrp</th>
+                                        <th scope="col">price</th>
+                                        <th scope="col">qty</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                     while($row=mysqli_fetch_assoc($res)){ 
                         ?>
-							<tr>
-								<th scope="row"><?php echo $row['id'] ?> </th>
-								<td ><?php echo $row['categories'] ?> </td>
-								<td> <img src="<?php echo PRODUCT_IMAGEI_SITE_PATH.$row['image'] ?>" height="100px" width="auto"> </td>
-                                <td> <?php echo $row['mrp'] ?> </td>
-                                <td> <?php echo $row['price'] ?> </td>
-                                <td> <?php echo $row['qty'] ?> </td>
-                                <td> <?php if($row['status'] ==1){
+                                    <tr>
+                                        <th scope="row"><?php echo $row['id'] ?> </th>
+                                        <td><?php echo $row['categories'] ?> </td>
+                                        <td> <img src="<?php echo PRODUCT_IMAGEI_SITE_PATH.$row['image'] ?>"
+                                                height="100px" width="auto"> </td>
+                                        <td> <?php echo $row['mrp'] ?> </td>
+                                        <td> <?php echo $row['price'] ?> </td>
+                                        <td> <?php echo $row['qty'] ?> </td>
+                                        <td> <?php if($row['status'] ==1){
                                     echo "<a href='?type=status&operation=disabled&id=".$row['id']."'>Active</a>&nbsp&nbsp";
                                 }else{
                                     echo "<a href='?type=status&operation=active&id=".$row['id']."'>Disabled</a>&nbsp&nbsp";
                                 }
                                 echo "<a href='?type=delete&id=".$row['id']."'>Delete</a>";
 								 echo "&nbsp&nbsp<a href='manage-products.php?id=".$row['id']."'>Edit</a>";  ?> </td>
-                                
-								
-                            <?php
-                    }
-                            ?>	
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
-<!-- </div> -->
-</div>
+
+                                        <?php
+                    }
+                            ?>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- </div> -->
+    </div>
 </div>
 
 <?php

@@ -14,10 +14,12 @@ if(isset($_POST["submit"])){
     $sql= "select * from `idadmin-users` where username = '$username' and password = '$password'";  
     $result = $con->query($sql);
     $count=mysqli_num_rows($result);
+    $row=mysqli_fetch_assoc($result);
     if($count > 0){
         $_SESSION['ADMIN_LOGIN']='yes';
         $_SESSION['USER_TYPE']='admin';
         $_SESSION['ADMIN_USERNAME']=$username;
+        $_SESSION['ADMIN_ID']=$row['id'];
         // header('location:dashboard.php');
         echo "<script>window.location.href='index.php'</script>";
     }
@@ -26,10 +28,12 @@ if(isset($_POST["submit"])){
         $sql= "select * from `tailors` where username = '$username' and password = '$password'";
         $result = $con->query($sql);
         $count=mysqli_num_rows($result);
+        $row=mysqli_fetch_assoc($result);
         if($count > 0){
             $_SESSION['TAILOR_LOGIN']='yes';
             $_SESSION['USER_TYPE']='tailor';
             $_SESSION['TAILOR_USERNAME']=$username;
+            $_SESSION['TAILOR_ID']=$row['id'];
             // header('location:dashboard.php');
             echo "<script>window.location.href='index.php'</script>";
         }

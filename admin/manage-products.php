@@ -15,6 +15,7 @@ $meta_title='';
 $meta_des='';
 $meta_keywords='';
 $best_seller='';
+$added_by='';
 if(isset($_GET['id']) && $_GET['id']!=''){
     $id= get_safe_value($con, $_GET['id']);
     $res=mysqli_query($con, "select * from `product` where id='$id'");
@@ -32,6 +33,7 @@ if(isset($_GET['id']) && $_GET['id']!=''){
         $meta_des=$row['meta_des'];
         $meta_keywords=$row['meta_keywords'];
         $best_seller=$row['best_seller'];
+        $added_by=$row['added_by'];
     }else{
         echo "<script>window.location.href='product.php'</script>";
         die();
@@ -50,6 +52,10 @@ if(isset($_POST['submit'])){
     $meta_des= get_safe_value($con, $_POST['meta_des']);
     $meta_keywords= get_safe_value($con, $_POST['meta_keywords']);
     $best_seller= get_safe_value($con, $_POST['best_seller']);
+    if($_SESSION['USER_TYPE']=='admin'){
+        $added_by= '0';}else{
+            $added_by= $_SESSION['TAILOR_ID'];
+        }
     $res=mysqli_query($con, "select * from `product` where name='$name'");
     $check=mysqli_num_rows($res);
     if($check>0){
