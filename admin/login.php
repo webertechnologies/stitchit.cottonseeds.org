@@ -18,7 +18,7 @@ if(isset($_POST["submit"])){
         $_SESSION['ADMIN_LOGIN']='yes';
         $_SESSION['ADMIN_USERNAME']=$username;
         // header('location:dashboard.php');
-        echo "<script>window.location.href='dashboard.php'</script>";
+        echo "<script>window.location.href='index.php'</script>";
     }
     else{
         $msg="May be you are not regitered, or check details";
