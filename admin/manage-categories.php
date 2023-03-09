@@ -72,6 +72,7 @@ if(isset($_POST['submit'])){
                                     <input class="btn btn-primary btn-min-width mr-1 mb-1" name="submit" type="submit"
                                         value="Insert">
                                 </div>
+                                <input type="submit">
                                 <div class="field_error">
                                     <?php
                         echo "<p>";

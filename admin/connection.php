@@ -4,6 +4,12 @@ $con = mysqli_connect("localhost","root","","tailors");
 if(mysqli_connect_errno()) {  
     die("Failed to connect with MySQL: ". mysqli_connect_error());  
 }
+
+// display errors 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 define('SERVER_PATH', $_SERVER['DOCUMENT_ROOT'].'/tailors/');
 define('SITE_PATH','http://localhost/tailors/');
 

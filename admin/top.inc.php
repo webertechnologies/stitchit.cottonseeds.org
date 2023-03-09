@@ -35,7 +35,7 @@ else{
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="theme-assets/css/vendors.css">
-    <link rel="stylesheet" type="text/css" href="theme-assets/vendors/css/charts/chartist.css">
+    <!-- <link rel="stylesheet" type="text/css" href="theme-assets/vendors/css/charts/chartist.css"> -->
     <!-- END VENDOR CSS-->
     <!-- BEGIN CHAMELEON  CSS-->
     <link rel="stylesheet" type="text/css" href="theme-assets/css/app-lite.css">
