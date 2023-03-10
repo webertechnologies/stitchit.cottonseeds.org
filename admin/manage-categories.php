@@ -54,7 +54,7 @@ if(isset($_POST['submit'])){
         <!-- <div class="content-body">Chart -->
         <div class="row match-height">
             <div class="col-lg-6 col-md-12">
-                <form method="POST" action="manage-categories?id=<?php echo $row['id']; ?>">
+                <form method="POST">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Insert Categories</h4>
