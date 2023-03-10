@@ -16,7 +16,7 @@ if(isset($_GET['order'])){
     if($res){
         echo "<script>alert('Order Placed Successfully')</script>";
     }else{
-        echo "<script>alert('Order Failed')</script>";
+        echo "<script>alert('Order Failed, Please try again')</script>";
     }
 }
 
