@@ -1,6 +1,7 @@
 <?php
 include('configs/connection.php');
 include('configs/functions.php');
+include('top_inc.php');
 if(isset($_GET['category'])){
     $category = $_GET['category'];
     $sql = "SELECT * FROM product WHERE categories_id = '$category'";
@@ -20,7 +21,6 @@ if(isset($_GET['category'])){
     $page_title="Products";
 }
 ?>
-<?php include('top_inc.php'); ?>
 <div class="content-wrapper">
 
     <div class="content-section">
