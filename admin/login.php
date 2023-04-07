@@ -25,7 +25,7 @@ if(isset($_POST["submit"])){
     }
     else{
         // also check `tailors` table for tailors login 
-        $sql= "select * from `tailors` where username = '$username' and password = '$password'";
+        $sql= "select * from `tailors` where email = '$username' and password = '$password'";
         $result = $con->query($sql);
         $count=mysqli_num_rows($result);
         $row=mysqli_fetch_assoc($result);
