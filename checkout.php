@@ -2,18 +2,35 @@
 include('configs/connection.php');
 include('configs/functions.php');
 include('top_inc.php'); 
+
+if(isset($_POST['submit'])){
+    $pid = $_POST['pid'];
+    $uid = $_SESSION['USER_ID'];
+    $order_date = date('Y-m-d');
+    $address= $_SESSION['USER_ADDRESS'];
+    $remark= $_POST['remark'];
+    $payment_type = '1';
+    $payment_status = '1';
+    $res = mysqli_query($con,"INSERT INTO `orders`(`id`,`pid`, `uid`,`remark`,`payment_type`,`payment_status`, `order_date`, `address`, `status`) VALUES (NULL,'$pid','$uid','$remark','$payment_type','$payment_status','$order_date','$address', '1')");
+    // echo query 
+    if($res){
+        echo "<script>alert('Order Placed Successfully')</script>";
+        echo "<script>window.location.href='myorders'</script>";
+    }else{
+        echo "<script>alert('Order Failed, Please try again')</script>";
+    }
+}
+
 // get tailor details 
-if(isset($_GET['uid'])){
-    $id = $_GET['uid'];
-    $res = mysqli_query($con,"SELECT * FROM `tailors` WHERE `id`='$id'");
+if(isset($_GET['pid'])){
+    $id = $_GET['pid'];
+    $res = mysqli_query($con,"SELECT * FROM `product` WHERE `id`='$id'");
     $row = mysqli_fetch_assoc($res);
     $name = $row['name'];
-    $address = $row['address'];
     $rating = $row['rating'];
     $image = $row['image'];
-    $mobile = $row['mobile'];
-    $email = $row['email'];
     $description = $row['des'];
+    $categories_id= $row['categories_id'];
 }
 ?>
 <div class="content-wrapper">
@@ -23,7 +40,7 @@ if(isset($_GET['uid'])){
             <!-- adress and rating in a flex row using boostrap  -->
             <div class="row">
                 <div class="col-6">
-                    <p class="content-text"><?php echo $address ?></p>
+                    <p class="content-text"><?php echo $categories_id ?></p>
                 </div>
                 <div class="col-6">
                     <p class="content-text">
@@ -41,40 +58,23 @@ if(isset($_GET['uid'])){
             <div class="content-text">
                 <?php echo $description; ?>
             </div>
-            <button class="content-button">Book Now</button>
+            <button class="content-button">Esti. Delivery date : </button>
         </div>
         <img class="content-wrapper-img" src="https://assets.codepen.io/3364143/glass.png" alt="" />
     </div>
     <div class="content-section">
         <!-- All products catalogue in a row using bootstrap  -->
         <div class="row">
-            <?php 
-              $res = mysqli_query($con,"SELECT * FROM `product` WHERE `added_by`='$id'");
-                while($row = mysqli_fetch_assoc($res)){
+            <p>Remarks</p>
+            <form method="POST">
+                <input name="pid" value="<?php echo $id; ?>" hidden>
+                <textarea name="remark" rows="7" cols="100"></textarea>
+                <br>
+                <p>Address</p>
+                <textarea name="address" rows="3" cols="100"><?php echo $_SESSION['USER_ADDRESS'] ?></textarea>
+                <button type="submit" name="submit" class="content-button">Submit</button>
 
-           ?>
-            <div class="col-sm">
-                <div class="card catt">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngimagesfree.com%2FPeople%2FSaree%2FSaree-2%2FSaree-PNG-For-Photoshop.png&f=1&nofb=1&ipt=a7392d612b59dc3a386f956ac80ab1184bf7d619a18fb6fa13d623b3c9e54cf8&ipo=images"
-                        class="card-img-top" alt="..." />
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $name; ?></h5>
-                        <p class="card-text text-center">
-                            <?php echo $row['des']; ?>
-                        </p>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="card-text text-center">Rs.<?php echo $row['price']; ?> </p>
-                            </div>
-                            <div class="col-6">
-                                <p class="card-text text-center"><?php echo $row['rating']; ?> </p>
-                            </div>
-                        </div>
-                        <a href="checkout?pid=<?php echo $row['id']; ?>" class="btn btn-primary">Order Now</a>
-                    </div>
-                </div>
-            </div>
-            <?php } ?>
+            </form>
 
         </div>
     </div>
