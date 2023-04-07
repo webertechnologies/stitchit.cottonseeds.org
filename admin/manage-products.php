@@ -1,5 +1,4 @@
 <?php
-echo "Hello World";
 require('top.inc.php');
 $categories='';
 $msg='';
@@ -100,11 +99,11 @@ if(isset($_POST['submit'])){
             echo "hii";
             echo "INSERT INTO `product` (`id`, `categories_id`, `name`, `mrp`, `price`,`image`, `qty`, `short_des`, `des`, `meta_title`, `meta_des`,`best_seller`, `meta_keywords`, `status`) VALUES (NULL, '$categories_id', '$name', '$mrp', '$price','$image','$qty', '$short_des', '$des', '$meta_title', '$meta_des','$best_seller', '$meta_keywords', '1')";
 
-            mysqli_query($con, "INSERT INTO `product` (`id`, `categories_id`, `name`, `mrp`, `price`,`image`, `qty`, `short_des`, `des`, `meta_title`, `meta_des`,`best_seller`, `meta_keywords`, `status`) VALUES (NULL, '$categories_id', '$name', '$mrp', '$price','$image','$qty', '$short_des', '$des', '$meta_title', '$meta_des','$best_seller', '$meta_keywords', '1')");
+            mysqli_query($con, "INSERT INTO `product` (`id`, `categories_id`, `name`, `mrp`, `price`,`image`, `qty`, `short_des`, `des`,`added_by`, `meta_title`, `meta_des`,`best_seller`, `meta_keywords`, `status`) VALUES (NULL, '$categories_id', '$name', '$mrp', '$price','$image','$qty', '$short_des', '$des','$added_by', '$meta_title', '$meta_des','$best_seller', '$meta_keywords', '1')");
             // print above statement
          }else{
             move_uploaded_file($_FILES['image']['tmp_name'],PRODUCT_IMAGE_SERVER_PATH.$image);
-            mysqli_query($con, "INSERT INTO `product` (`id`, `categories_id`, `name`, `mrp`, `price`,`image`, `qty`, `short_des`, `des`, `meta_title`, `meta_des`,`best_seller`, `meta_keywords`, `status`) VALUES (NULL, '$categories_id', '$name', '$mrp', '$price','$image','$qty', '$short_des', '$des', '$meta_title', '$meta_des','$best_seller', '$meta_keywords', '1')");
+            mysqli_query($con, "INSERT INTO `product` (`id`, `categories_id`, `name`, `mrp`, `price`,`image`, `qty`, `short_des`, `des`, `added_by`,`meta_title`, `meta_des`,`best_seller`, `meta_keywords`, `status`) VALUES (NULL, '$categories_id', '$name', '$mrp', '$price','$image','$qty', '$short_des', '$des','$added_by', '$meta_title', '$meta_des','$best_seller', '$meta_keywords', '1')");
          }
         // if(move_uploaded_file($_FILES['image']['tmp_name'],PRODUCT_IMAGE_SERVER_PATH.$image)){
         //      echo "image uploaded";  }else{
@@ -133,7 +132,7 @@ if(isset($_POST['submit'])){
         <!-- <div class="content-body">Chart -->
         <div class="row match-height">
             <div class="col-lg-6 col-md-12">
-                <form method="POST" enctype="multipart/form-data" action="manage-products?id=<?php echo $row['id']; ?>">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Insert Products</h4>
@@ -245,7 +244,6 @@ if(isset($_POST['submit'])){
                                     <?php
                         echo "<p>";
                         echo $msg;
-                        echo "ima an alert";
                         echo "</p>";
                         ?></div>
                             </div>
