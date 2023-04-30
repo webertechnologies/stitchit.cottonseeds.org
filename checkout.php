@@ -10,7 +10,7 @@ date_default_timezone_set('Asia/Kolkata');
 $today = date("Y-m-d");
 
 if(isset($_POST['submit'])){
-    $pid = $_POST['pid'];
+    $pid = $_POST['pid'];9+
     $uid = $_SESSION['USER_ID'];
     $order_date = date('Y-m-d');
     $address= $_SESSION['USER_ADDRESS'];
@@ -48,7 +48,12 @@ if(isset($_GET['pid'])){
             <!-- adress and rating in a flex row using boostrap  -->
             <div class="row">
                 <div class="col-6">
-                    <p class="content-text"><?php echo $categories_id ?></p>
+                    <p class="content-text"><?php 
+                    // get category name
+                    $res = mysqli_query($con,"SELECT * FROM `categories` WHERE `id`='$categories_id'");
+                    $row = mysqli_fetch_assoc($res);
+                    echo $row['categories'];
+                    ?></p>
                 </div>
                 <div class="col-6">
                     <p class="content-text">
@@ -73,10 +78,15 @@ if(isset($_GET['pid'])){
     <div class="content-section">
         <!-- All products catalogue in a row using bootstrap  -->
         <div class="row">
-            <p>Remarks</p>
+            <p>Measurements</p>
             <form method="POST">
                 <input name="pid" value="<?php echo $id; ?>" hidden>
-                <textarea name="remark" rows="7" cols="100"></textarea>
+                <textarea name="remark" rows="7" cols="100">Shoulder length
+Hand length
+Body length
+Neck style 
+Bust
+Waist</textarea>
                 <br>
                 <p>Address</p>
                 <textarea name="address" rows="3" cols="100"><?php echo $_SESSION['USER_ADDRESS'] ?></textarea>
