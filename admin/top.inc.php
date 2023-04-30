@@ -112,7 +112,8 @@ else{
                             </div>
                         </li>
                         <li class="dropdown dropdown-user <?php echo $nav_state_cat ?>"><a
-                                class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                class="dropdown-toggle nav-link dropdown-user-link" href="logout"
+                                data-toggle="dropdown">
                                 <span class="avatar avatar-online"><img
                                         src="theme-assets/images/portrait/small/avatar-s-19.png"
                                         alt="avatar"><i></i></span></a>
