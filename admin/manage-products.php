@@ -95,8 +95,8 @@ if(isset($_POST['submit'])){
         $image=rand(1111111111,9999999999).'_'.$_FILES['image']['name'];
         // echo "image name: ".$image;
         // echo PRODUCT_IMAGE_SERVER_PATH.$image;
-        if (!is_writeable(PRODUCT_IMAGE_SERVER_PATH.$image)) {
-            echo "hii";
+        if (!is_writeable(PRODUCT_IMAGE_SERVER_PATH)) {
+            $image='media/product/default.png';
             echo "INSERT INTO `product` (`id`, `categories_id`, `name`, `mrp`, `price`,`image`, `qty`, `short_des`, `des`, `meta_title`, `meta_des`,`best_seller`, `meta_keywords`, `status`) VALUES (NULL, '$categories_id', '$name', '$mrp', '$price','$image','$qty', '$short_des', '$des', '$meta_title', '$meta_des','$best_seller', '$meta_keywords', '1')";
 
             mysqli_query($con, "INSERT INTO `product` (`id`, `categories_id`, `name`, `mrp`, `price`,`image`, `qty`, `short_des`, `des`,`added_by`, `meta_title`, `meta_des`,`best_seller`, `meta_keywords`, `status`) VALUES (NULL, '$categories_id', '$name', '$mrp', '$price','$image','$qty', '$short_des', '$des','$added_by', '$meta_title', '$meta_des','$best_seller', '$meta_keywords', '1')");
@@ -105,11 +105,6 @@ if(isset($_POST['submit'])){
             move_uploaded_file($_FILES['image']['tmp_name'],PRODUCT_IMAGE_SERVER_PATH.$image);
             mysqli_query($con, "INSERT INTO `product` (`id`, `categories_id`, `name`, `mrp`, `price`,`image`, `qty`, `short_des`, `des`, `added_by`,`meta_title`, `meta_des`,`best_seller`, `meta_keywords`, `status`) VALUES (NULL, '$categories_id', '$name', '$mrp', '$price','$image','$qty', '$short_des', '$des','$added_by', '$meta_title', '$meta_des','$best_seller', '$meta_keywords', '1')");
          }
-        // if(move_uploaded_file($_FILES['image']['tmp_name'],PRODUCT_IMAGE_SERVER_PATH.$image)){
-        //      echo "image uploaded";  }else{
-        //         echo "image not uploaded";
-
-        //      }
 
    }
     echo "<script>window.location.href='product.php'</script>";

@@ -47,11 +47,8 @@ if(isset($_GET['order'])){
             <div class="col-sm">
                 <div class="card catt">
                     <img src="<?php 
-                    if($row['image']==''){
-                        echo "images/no-image.png";
-                    }else{
-                    echo 'media/product/'.$row['image'] ;
-                        } ?>" class="card-img-top" alt="..." />
+                    echo $row['image'];
+                    ?>" class="card-img-top" alt="..." />
                     <div class="card-body">
                         <h5 class="card-title text-center"><?php echo $row['name'] ?></h5>
                         <p class="card-text text-center">
