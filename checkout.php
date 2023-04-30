@@ -3,6 +3,12 @@ include('configs/connection.php');
 include('configs/functions.php');
 include('top_inc.php'); 
 
+// set time zone
+date_default_timezone_set('Asia/Kolkata');
+
+// Current date
+$today = date("Y-m-d");
+
 if(isset($_POST['submit'])){
     $pid = $_POST['pid'];
     $uid = $_SESSION['USER_ID'];
@@ -31,6 +37,8 @@ if(isset($_GET['pid'])){
     $image = $row['image'];
     $description = $row['des'];
     $categories_id= $row['categories_id'];
+    $delivery_days = $row['delivery_days'];
+    $expected_delivery = date('Y-m-d', strtotime($today. ' + '.$delivery_days.' days'));
 }
 ?>
 <div class="content-wrapper">
@@ -58,7 +66,7 @@ if(isset($_GET['pid'])){
             <div class="content-text">
                 <?php echo $description; ?>
             </div>
-            <button class="content-button">Esti. Delivery date : </button>
+            <button class="content-button">Esti. Delivery date : <?php echo $expected_delivery; ?> </button>
         </div>
         <img class="content-wrapper-img" src="https://assets.codepen.io/3364143/glass.png" alt="" />
     </div>
