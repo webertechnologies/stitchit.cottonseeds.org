@@ -42,7 +42,9 @@ if(isset($_GET['category'])){
                         ?>
 
 
-            <div class="col-sm">
+            <div class="col-sm" style="
+    min-width: 300px;
+">
                 <div class="card catt">
                     <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngimagesfree.com%2FPeople%2FSaree%2FSaree-2%2FSaree-PNG-For-Photoshop.png&f=1&nofb=1&ipt=a7392d612b59dc3a386f956ac80ab1184bf7d619a18fb6fa13d623b3c9e54cf8&ipo=images"
                         class="card-img-top" alt="..." />

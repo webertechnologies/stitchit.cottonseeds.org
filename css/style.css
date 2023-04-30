@@ -850,6 +850,8 @@ body.light-mode .video-bg:before {
   padding: 20px;
   cursor: pointer;
   transition: 0.3s ease;
+  margin-right: 1em;
+  margin-bottom: 1em;
 }
 .app-card:hover {
   transform: scale(1.02);
@@ -862,7 +864,7 @@ body.light-mode .video-bg:before {
   flex-shrink: 0;
 }
 .app-card + .app-card {
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 .app-card span {
   display: flex;
