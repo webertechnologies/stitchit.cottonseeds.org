@@ -58,8 +58,7 @@ if(isset($_GET['category'])){
                                 <p class="card-text text-center">Price: <?php echo $row['price']; ?></p>
                             </div>
                             <div class="col-6">
-                                <p class="card-text text-center"><a
-                                        href="myorders?order=<?php echo $row['id']; ?> ">Order
+                                <p class="card-text text-center"><a href="checkout?pid=<?php echo $row['id']; ?> ">Order
                                         Now</a></p>
                             </div>
                         </div>

@@ -9,7 +9,7 @@ if(isset($_POST['submit'])){
     $order_date = date('Y-m-d');
     $address= $_SESSION['USER_ADDRESS'];
     $remark= $_POST['remark'];
-    $payment_type = '1';
+    $payment_type = $_POST['payment_type'];
     $payment_status = '1';
     $res = mysqli_query($con,"INSERT INTO `orders`(`id`,`pid`, `uid`,`remark`,`payment_type`,`payment_status`, `order_date`, `address`, `status`) VALUES (NULL,'$pid','$uid','$remark','$payment_type','$payment_status','$order_date','$address', '1')");
     // echo query 
@@ -72,6 +72,14 @@ if(isset($_GET['pid'])){
                 <br>
                 <p>Address</p>
                 <textarea name="address" rows="3" cols="100"><?php echo $_SESSION['USER_ADDRESS'] ?></textarea>
+                <br>
+                <p>Payment Method</p>
+                <select name="payment_type">
+                    <option value="1">Cash on Delivery</option>
+                    <option value="2">Online Payment</option>
+                </select>
+                <br>
+
                 <button type="submit" name="submit" class="content-button">Submit</button>
 
             </form>
